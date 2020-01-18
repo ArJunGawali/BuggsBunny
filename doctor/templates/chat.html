@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+		{% block menu %}
+		<div id="menu">
+			<ul>
+				<li class="first active">
+					<a href="http://127.0.0.1:8000/doctor/">Home</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/doctor/add/">Add Disease</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/doctor/chat/">Chat</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/doctor/dloc/">Location wise Disease</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/login/">Logout</a>
+				</li>
+				
+			</ul><br class="clearfix" />
+		</div>
+		{% endblock %}
+
+{% block content %}
+
+	<br>
+	<h1>Doctors List</h1>
+	<br>
+
+	{% for i in dlist %}
+		{% if i.6 == '0' %}
+	<div id='chat_list'>
+		<table height="120" width="600" style="border:2px solid #209D9D;border-radius:20px;">
+			<tr>
+				<td><h3><b>{{ i.1 }}</b></h3></td>
+				<td style="float: right;"><b><a href="#">Message</a></b></td>
+			</tr>
+		
+				
+			
+		</table>
+	</div>
+	{% endif %}
+	{% endfor %}
+
+{% endblock %}

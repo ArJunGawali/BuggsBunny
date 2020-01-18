@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+		{% block menu %}
+		<div id="menu">
+			<ul>
+				<li class="first active">
+					<a href="http://127.0.0.1:8000/doctor/">Home</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/doctor/add/">Add Disease</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/doctor/chat/">Chat</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/doctor/dloc/">Location wise Disease</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/login/">Logout</a>
+				</li>
+				
+			</ul><br class="clearfix" />
+		</div>
+		{% endblock %}
+
+{% block content %}
+
+{{ username }}
+<!-- <input type="hidden" name="return" value=http://127.0.0.1:8000/doctor/?uid={{username}} > -->
+
+<h3>Admin Home Not Working!!!</h3>
+
+{% endblock %} 

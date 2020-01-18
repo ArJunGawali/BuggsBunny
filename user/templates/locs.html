@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+		{% block menu %}
+		<div id="menu">
+			<ul>
+				<li class="first active">
+					<a href="http://127.0.0.1:8000/user/">Home</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/user/locs/">Find</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/user/settings/">Settings</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/login/">Logout</a>
+				</li>
+				
+			</ul><br class="clearfix" />
+		</div>
+		{% endblock %}
+
+{% block content %}
+
+<h2>Find Disease Location wise</h2><br>
+
+<form method="POST" enctype="multipart/form-data" action='http://127.0.0.1:8000/user/locs/' >
+{% csrf_token %}
+<table>
+	<tr>
+<td>City Name</td>
+<td><input type="text" name="city" placeholder="Enter city name" style="border-radius: 5px; width : 250px; height : 28px ; padding-left:5px;" /> </td>
+</tr>
+
+<tr>
+<td><input type="submit" value="find" style="border-radius: 5px;  height : 35px ; text-align: center; width : 100px;" /> </td>
+</tr>
+
+
+
+</table>
+
+</form>
+
+{{ output }}
+
+{% endblock %}

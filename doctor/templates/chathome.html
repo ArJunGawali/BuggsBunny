@@ -1,0 +1,244 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+	<head>
+  
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+		<link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+		
+		<link href="https://fonts.googleapis.com/css?family=Notable|Anton|Abril+Fatface|Comfortaa|Concert+One|Libre+Caslon+Display|Lobster|Patua+One&display=swap" rel="stylesheet">
+		
+		<title>Cognition</title>
+		
+		<style>
+			#left-div {
+			float:left;
+			background-image:linear-gradient(to right bottom,grey,white);
+			height:100%;
+			width:20%;
+			border-right:0.5vw solid rgb(96, 88, 99);
+		}
+
+		#right-div {
+			float:right;
+			background-color:rgb(226, 220, 232);
+			height:99%;
+			width:80%;
+		}
+
+		#right-nav {
+			text-align:center;
+			width:100%;
+			background-color:rgb(174, 228, 239);
+			font-size:44px;
+			padding:6px;
+			font-family: 'Lobster', sans-serif;
+			
+		}
+
+		#title-head {
+			text-shadow:3px 4px 3px rgb(225, 241, 244);
+		}
+
+		#left-nav {
+			width:100%;	
+			background-color:rgb(94, 146, 188);
+			font-size:28px;
+			font-weight:bold;
+			padding-top:10px;
+			padding-bottom:10px;
+			padding-left:15px;
+			font-family:'Comfortaa',cursive;
+		}
+
+		#topic-div {
+			width:100%;
+			background-color:green;
+			flex-direction:column;
+		}
+
+		#back {
+			color:white;
+			text-decoration:none;
+			float:left;
+			cursor:pointer;
+		}
+
+		.topics {
+			font-family:'Comfortaa',cursive;
+			width:100%;
+			height:100%;
+			padding:8px;
+			background-color:rgb(236, 232, 249);
+			border-bottom:1px solid black;
+			font-size:23px;
+			padding:5px;
+			padding-left:15px;
+		}
+
+		#messages {
+			width:100%;
+			height:89%;
+			background-color:rgb(226, 220, 232);
+			overflow: auto;
+			font-size:30px;
+			padding-left:3%;
+			padding:15px;
+			padding-bottom:12vh;
+		}
+
+		#chat {
+			position:absolute;
+			bottom:4vh;
+			right:8vw;
+			width:70%;
+			border-radius:20px;
+			border:none;
+			resize:none;
+			font-size:20px;
+			box-shadow: 7px 15px 15px #888888;
+			padding-left:15px;
+			padding-top:15px;
+	
+		}
+
+		#message_self:focus {
+			outline:none !important;
+		}
+
+		#old_message {
+			background-color:white;
+			padding:1vw;
+			margin-top:15px;
+			margin-bottom:15px;
+			border-radius:15px;
+			clear:both;
+			
+		}
+
+		#new_message {
+			background-color:white;
+			margin-top:15px;
+			margin-bottom:15px;
+			border-radius:15px;
+			padding:10px;
+			padding-right:20px;
+			padding-left:20px;
+			clear:both;
+			float:left;
+			box-shadow: 4px 5px 10px #888888;
+		}
+
+		#convert-button {
+			position:absolute;
+			bottom:4vh;
+			right:2vw;
+			background-color:rgb(165, 183, 135);
+			border-radius:50%;
+			height:75px;
+			width:75px;
+			display:flex;
+			justify-content:center;
+			vertical-align:middle;
+			font-size:45px;
+			color:white;
+			box-shadow: 7px 15px 15px #888888;
+			cursor:pointer;
+		}
+
+		#symbol {
+			
+			background-color:green;
+			height:50px;
+			padding:0px;
+		}
+
+		#whole {
+			width:100%;
+			height:100vh;
+			background-color:black;
+		}
+
+		#log-out
+		{
+			float:right;
+			font-size:5vh;
+			cursor:pointer;
+		}
+
+		</style>
+	</head>
+  
+	<body>
+	<div id="whole">
+		<div id="left-div">
+			
+			<div id="left-nav">
+				<p style="font-size:1%%">logged in as</p>
+				<span id="topic-head">
+				{{user}}
+				</span>
+			</div>	
+				<div id="topic-div">
+					
+					<li class="topics"></li>
+					
+				</div>
+		</div>
+		<div id="right-div">
+			<div id="right-nav">
+				<span id="back" onClick="goBack()" class="next round">&#8678;</span>
+				<span id="title-head">EMOJISTAAN</span>
+				<a href="{% url 'logout' %}"><span id="log-out">logout</span></a>
+			</div>
+			<div id="messages">
+				{% for i,j  in finallist %}	    	
+						{% if user.username == i %}
+							<div id="old_message" style="float:right; color:red;" >
+								<span>
+									<p style="font-size:12px; color:grey;">{{ i }}</p>
+									<p>{{ j }}</p>
+									<br>
+									<br>
+								</span>
+							</div>							
+						{% endif %}
+						{% if user.username != i %}
+							<div id="old_message" style="float:left; color:green;" >
+								<span>
+									<p style="font-size:12px; color:grey;">{{ i }}</p>
+									<p>{{ j }}</p>
+									<br>
+									<br>
+								</span>
+							</div>				
+						{% endif %}						
+				{% endfor %}
+			</div>
+			<div id="last"></div>
+			{% csrf_token %}
+			<form id="chat-in" method="post">
+     		 {% csrf_token %}
+					
+				<input type="text"  name='chat' id='chat' class="btn btn-outline-info" placeholder="Enter message here" ></input>
+						
+				<input type='submit' id="convert-button" class='btn btn-outline-info' value="->"></input>
+						
+			</form>
+		</div>
+	</div>	
+	
+	</body>
+	<script>
+		
+	</script>
+ 
+</html>
